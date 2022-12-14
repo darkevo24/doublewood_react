@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import './customer.css'
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -48,10 +49,10 @@ export default function FullScreenDialog(props) {
 
   return (
     <div>
-      <Button  variant="outlined"  onClick={handleClickOpen} style={{display: "block" ,margin: "auto", border: "white", color:"white", fontSize: 12}}>
+      <Button  variant="outlined"  onClick={handleClickOpen} style={{display: "block" ,margin: "auto", color:"white", fontSize: 18,borderRadius:"10px",backgroundColor:"black",marginTop:"40px"}}>
         Go to Cart
       </Button>
-      <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+      <Dialog className='dialog' fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">

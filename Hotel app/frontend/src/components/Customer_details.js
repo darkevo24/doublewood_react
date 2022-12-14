@@ -149,7 +149,7 @@ export default class Customerform extends React.Component {
                 />
                 <br />
                 <br />
-                <button style={{display:"block", width: "100%", padding:" 15px 32px",fontSize:"16px", backgroundColor:'purple', color: "white", pointerEvents: "cursor"}} onClick={this.recieve}>Submit</button>
+                <button style={{display:"block",borderRadius:"10px", width: "100%", padding:" 15px 32px",fontSize:"16px", color: "white",cursor:"pointer"}} onClick={this.recieve}>Submit</button>
                 <br />
                 </div> 
                 </MuiThemeProvider>

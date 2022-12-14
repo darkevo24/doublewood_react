@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-reader'
+import './customer.css';
 
 export default class Example extends Component {
   constructor(props){
@@ -53,8 +54,9 @@ export default class Example extends Component {
     return(
       <div>
         <QrReader
+        className='qr'
           delay={this.state.delay}
-          style={previewStyle}
+          // style={previewStyle}
           onError={this.handleError}
           onScan={this.handleScan}
           />

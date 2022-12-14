@@ -7,15 +7,18 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import './customer.css';
+import Toastify from 'toastify-js'
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 275,
-    maxWidth: 700,
+    width : "50%",
     margin: "auto",
     marginTop: 200,
     borderRadius: "1rem",
-    border: "2px solid black"
+    boxShadow: '10px 10px black',
+    "@media (max-width: 600px)": {
+      width : "80%"
+    }
   },
   bullet: {
     display: 'inline-block',
@@ -97,7 +100,20 @@ const handleCancel = () => {
     body: JSON.stringify({'sessionid':sessid,'orderid':data1.orderid})
   }).then(res => {
     if(res.ok){
-      alert("Order cancelled");
+      Toastify({
+        text: "Order cancelled",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
       window.location.replace("/place_order")
     }
   })
@@ -107,7 +123,7 @@ const handleCancel = () => {
       <div className="bg3">
     <Card className={classes.card}>
       <CardContent>
-      <button style={{display:"block", margin: "auto" ,backgroundColor:'red',color:"white",fontSize:"16px",marginBottom: "20px", height: "40px",width: 200}} onClick={() => handleCancel()}>Cancel Order</button>
+      <button style={{display:"block", margin: "auto" ,backgroundColor:'red',color:"white",borderRadius:10,fontSize:"16px",marginBottom: "20px", height: "40px",width: 200,cursor:"pointer"}} onClick={() => handleCancel()}>Cancel Order</button>
         <Typography variant="h5" component="h2">
             {data1.name}
         </Typography>
@@ -147,7 +163,7 @@ const handleCancel = () => {
         </div> 
       </CardContent>
       <CardActions>
-      <button pointer="cursor" style={{display:"block", width: "100%", backgroundColor:'green',color:"white", padding:" 15px 32px",fontSize:"16px", pointer:"cursor", marginBottom: "20px"}} onClick={() => handleClick()}>Pay</button>
+      <button pointer="cursor" style={{cursor:"pointer",display:"block", width: "100%", backgroundColor:'#4681f4',borderRadius:10,color:"white", padding:" 15px 32px",fontSize:"16px", pointer:"cursor", marginBottom: "20px"}} onClick={() => handleClick()}>Pay</button>
       </CardActions>
     </Card>
     </div>

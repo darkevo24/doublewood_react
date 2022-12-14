@@ -3,7 +3,7 @@ import Card from './Card';
 import Cart from './Cart';
 import './customer.css';
 import {isLoggedInCustomer} from './auth';
-
+import Toastify from 'toastify-js'
 
 export default class Customermenu extends React.Component {
     constructor(props){
@@ -31,7 +31,20 @@ export default class Customermenu extends React.Component {
       this.setState(prevState => {
         return {grandtotal: prevState.grandtotal + x.amount}
       })
-      alert("Item added to cart");
+      Toastify({
+        text: "Item added to cart",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
    } 
 
    handleRemove = (key,i) => {
@@ -79,7 +92,7 @@ export default class Customermenu extends React.Component {
         body: JSON.stringify(customerorder)
       }).then(res => {
         if(res.ok){
-          alert("Order Confirmed");
+          // toast("Order Confirmed");
           window.location.replace("/pay")
         }
       })
@@ -92,7 +105,7 @@ export default class Customermenu extends React.Component {
       render(){      
         return (
             <div className="bg2">
-            <div style={{backgroundColor: "black", height: 70}}>
+            <div>
                 <Cart
                   food={this.state.food}
                   handleAdd={this.handleAdd}

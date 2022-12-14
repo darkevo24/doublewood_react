@@ -7,6 +7,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    display: flex;
+    align-items: center;
 }
 
 .cuss {
@@ -14,10 +16,10 @@
     min-width: 300px;
     max-width: 700px;
     margin: auto;
-    margin-top: 200px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: 2px solid black;
     border-radius: 5%;
+    padding: 15px;
+    width: 100%;
 }
 
 .bg2 {
@@ -53,4 +55,38 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.button {
+    width : 400px;
+}
+
+.qr {
+    height: 500px;
+    width: 800px;
+    margin: auto;
+}
+
+.box {
+    width : 50%;
+}
+
+.dialog {
+    padding:40px;
+}
+
+@media (max-width:600px) {
+    .button {
+        width : 300px;
+    }
+    .qr {
+        width : 300px;
+        height: 500px;
+    }
+    .box {
+        width:80%;
+    }
+    .cuss {
+        width : 85%;
+    }
 }
