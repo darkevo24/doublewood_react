@@ -29,7 +29,7 @@ const test = fooditem => {
 
 const handleUpdate = (x) => {
   const data = {'status': 'Food is ready'};
-  fetch(`/update_status/${x.orderid}`, {
+  fetch(`http://darkevo24.pythonanywhere.com/update_status/${x.orderid}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

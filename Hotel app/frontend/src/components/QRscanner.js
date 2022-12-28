@@ -15,9 +15,14 @@ export default class Example extends Component {
   handleScan(data){
     if(data){
       this.setState({ result: data })
-      if (sessionStorage.getItem("customer_access_token") !== null && sessionStorage.getItem("customer_access_token")!=="undefined") {
         const sessionidx = sessionStorage.getItem("customer_access_token")
-         fetch(`/add_table/${sessionidx}`, {
+
+        fetch('http://darkevo24.pythonanywhere.com/scan_data').then( res => res.json())
+        .then(data=>{
+           sessionStorage.setItem('customer_access_token', data.customer_access_token);
+        }).catch(err => console.log("err",err));
+
+         fetch(`http://darkevo24.pythonanywhere.com/add_table/1`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -31,15 +36,11 @@ export default class Example extends Component {
               console.log("data not sent")
             }
         })
-      }
-      else{
-        alert("Customer details not entered")
-      }
     }
     else{
       console.log("Not working")
     }
-  }
+      }
 
   handleError(err){
     console.error(err)

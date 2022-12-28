@@ -2,14 +2,13 @@ import React, { useState,useEffect } from "react";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import Ordertable from "./Ordertable";
 
-
 export default function Order(){
   
   const [data1, setData] = useState([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-        fetch("/order").then( res => res.json()).then(data =>{
+        fetch("http://darkevo24.pythonanywhere.com/order").then( res => res.json()).then(data =>{
             setData(data.order_items)
         })
     }, 3000);
@@ -20,7 +19,7 @@ export default function Order(){
  const handleRemove = i => {
     let deletedata = data1.filter((row, j) => j === i)
     let temp = JSON.stringify(deletedata);
-    fetch('/order_delete', {
+    fetch('http://darkevo24.pythonanywhere.com/order_delete', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

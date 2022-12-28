@@ -43,13 +43,13 @@ export default class Registerform extends React.Component {
       const user = { email , password };
       const isValid = this.validate();
       if(isValid){
-        fetch('/login', {
+        fetch('http://darkevo24.pythonanywhere.com/login', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(user)
-        }).then( res => res.json())
+        }).then(res => res.json())
         .then(data=>{
           localStorage.setItem('access_token', data.access_token);
           localStorage.setItem('email', data.email)
@@ -57,7 +57,7 @@ export default class Registerform extends React.Component {
           if (localStorage.getItem("access_token") !== null && localStorage.getItem("access_token")!=="undefined") {
             window.location.replace("/main")
           }else{
-              alert(data.error)
+              alert(data)
           }
         }).catch(err => console.log(err));;
       }

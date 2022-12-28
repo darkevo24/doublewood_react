@@ -8,16 +8,17 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import './customer.css';
 import Toastify from 'toastify-js'
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles({
   card: {
     width : "50%",
     margin: "auto",
-    marginTop: 200,
+    // marginTop:100,
     borderRadius: "1rem",
     boxShadow: '10px 10px black',
     "@media (max-width: 600px)": {
-      width : "80%"
+      width : "80%",
     }
   },
   bullet: {
@@ -44,15 +45,17 @@ export default function SimpleCard() {
   const [nameError, setNameerror] = React.useState("");
   const [numberError, setNumbererror] = React.useState("");
   const [toggle, setToggle] = React.useState(false);
+
+  const {id} = useParams();
   
   useEffect(() => {
     const sessid = sessionStorage.getItem("customer_access_token");
-    fetch("/getpayment",{
+    fetch("http://darkevo24.pythonanywhere.com/getpayment",{
         method: "POST",
         headers: {
         "Content-Type": "application/json"
         },
-        body: JSON.stringify({'sessionid':sessid})
+        body: JSON.stringify({'tableno':id})
     }).then( res => res.json()).then(data =>{
         setData(data.customer_details)
         console.log(data)
@@ -83,7 +86,7 @@ export default function SimpleCard() {
 const handleClick = () => {
    if(validate()){
       console.log("hi")
-      window.location.replace("/checkout")
+      window.location.replace("/checkout/" + id)
    }
    else{
      console.log("hello")
@@ -92,12 +95,12 @@ const handleClick = () => {
 
 const handleCancel = () => {
   const sessid = sessionStorage.getItem("customer_access_token");
-  fetch("/order_cancel",{
+  fetch("http://darkevo24.pythonanywhere.com/order_cancel",{
     method: "POST",
     headers: {
     "Content-Type": "application/json"
     },
-    body: JSON.stringify({'sessionid':sessid,'orderid':data1.orderid})
+    body: JSON.stringify({'sessionid':sessid,'orderid':data1.orderid,"tableno" : id})
   }).then(res => {
     if(res.ok){
       Toastify({
@@ -114,7 +117,7 @@ const handleCancel = () => {
         },
         onClick: function(){} // Callback after click
       }).showToast();
-      window.location.replace("/place_order")
+      window.location.replace("/place_order/" + id)
     }
   })
 }
@@ -125,14 +128,14 @@ const handleCancel = () => {
       <CardContent>
       <button style={{display:"block", margin: "auto" ,backgroundColor:'red',color:"white",borderRadius:10,fontSize:"16px",marginBottom: "20px", height: "40px",width: 200,cursor:"pointer"}} onClick={() => handleCancel()}>Cancel Order</button>
         <Typography variant="h5" component="h2">
-            {data1.name}
+            {/* {data1.name} */}
         </Typography>
         <Typography variant="body2" component="p">
           Order Id: {data1.orderid}
           <br/>
           Table No: {data1.tableno}
           <br/>
-          Subtotal: {data1.amount}
+          Subtotal: Rm {data1.amount} 
           <br/>
         </Typography>
         <div>

@@ -80,7 +80,7 @@ export default function ClippedDrawer(props) {
   const onSubmit = (e) => {
     e.preventDefault();
     const data = { id, name, description, amount }
-    fetch('/menu_create', {
+    fetch('http://darkevo24.pythonanywhere.com/menu_create', {
      method: "POST",
      headers: {
        "Content-Type": "application/json"

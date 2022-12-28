@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import Card from './Card';
 import Cart from './Cart';
 import './customer.css';
@@ -12,6 +12,7 @@ export default class Customermenu extends React.Component {
         data1: [],
         food: [],
         grandtotal: 0,
+        id : this.props.match.params.id
       };
       this.additem = this.additem.bind(this);
       this.handleRemove = this.handleRemove.bind(this);
@@ -20,7 +21,7 @@ export default class Customermenu extends React.Component {
     }
     
     componentDidMount(){
-      fetch("/menu").then( res => res.json()).then(data =>{
+      fetch("http://darkevo24.pythonanywhere.com/menu").then( res => res.json()).then(data =>{
           this.setState({data1: data.food_items})
       })
     }
@@ -78,33 +79,28 @@ export default class Customermenu extends React.Component {
    };
 
    handleConfirm = () => {
-     if(isLoggedInCustomer()){
       const sessid = sessionStorage.getItem("customer_access_token");
       const food = JSON.stringify(this.state.food);
       const grandtotal = this.state.grandtotal;
-      const customerorder = {'sessionid':sessid,food,grandtotal}
+      const customerorder = {'sessionid':sessid,food,grandtotal,"tableno" : this.state.id}
       console.log(JSON.stringify(customerorder));
-      fetch('/order', {
+      fetch('http://darkevo24.pythonanywhere.com/order', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(customerorder)
       }).then(res => {
+        console.log(res);
         if(res.ok){
-          // toast("Order Confirmed");
-          window.location.replace("/pay")
+          window.location.replace("/pay/" + this.state.id)
         }
       })
-     }
-     else{
-       console.log("hello")
-     }
-   };
-
-      render(){      
+     };
+      render(){ 
         return (
             <div className="bg2">
+              <h1 style={{ color : "black",textAlign:"center" }}> Table{this.state.id}</h1>
             <div>
                 <Cart
                   food={this.state.food}

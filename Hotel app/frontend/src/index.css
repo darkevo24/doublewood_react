@@ -13,10 +13,10 @@ body {
 }
 
 button {
-  background-color: #4681f4;
+  background-color: #ff9419;
   border : 0px solid white;
 }
 
-button:hover {
+/* button:hover {
   opacity: 80%;
-}
+} */

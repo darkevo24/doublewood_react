@@ -61,7 +61,7 @@ export default class Registerform extends React.Component {
       const user = {firstname , lastname , email , password};
       const isValid = this.validate();
       if(isValid){
-        fetch('/register', {
+        fetch('http://darkevo24.pythonanywhere.com/register', {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

@@ -49,11 +49,11 @@ export default function SimpleCard(props) {
                {x.description}
              </Typography>
              <Typography className={classes.title} color="textSecondary" gutterBottom>
-               Price: Rs.{x.amount}
+               Price: Rm {x.amount}
              </Typography>
            </CardContent>
            <CardActions>
-            <Button variant="outlined" style={{backgroundColor:"#4681f4",color : "white"}} onClick={() => additem(x,i)}>Add to Cart</Button>
+            <Button variant="outlined" style={{backgroundColor:"#ff9419",color : "white"}} onClick={() => additem(x,i)}>Add to Cart</Button>
            </CardActions>
          </Card>
           ))} 

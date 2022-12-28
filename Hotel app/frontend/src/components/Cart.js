@@ -49,7 +49,7 @@ export default function FullScreenDialog(props) {
 
   return (
     <div>
-      <Button  variant="outlined"  onClick={handleClickOpen} style={{display: "block" ,margin: "auto", color:"white", fontSize: 18,borderRadius:"10px",backgroundColor:"black",marginTop:"40px"}}>
+      <Button  variant="outlined"  onClick={handleClickOpen} style={{display: "block" ,margin: "auto", color:"white", fontSize: 18,borderRadius:"10px",backgroundColor:"black"}}>
         Go to Cart
       </Button>
       <Dialog className='dialog' fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>

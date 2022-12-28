@@ -21,7 +21,6 @@ export default class Customerform extends React.Component {
         guestsError : "",
         toggle : false
       };
-    
 
     validate = () => {
         let nameError = "";
@@ -41,7 +40,7 @@ export default class Customerform extends React.Component {
             emailError = "Invalid Email";
         }
 
-        if (this.state.mobileno.length!==10)
+        if (this.state.mobileno.length<10)
         {
           mobileError="Invalid Mobile Number";
         }
@@ -67,33 +66,39 @@ export default class Customerform extends React.Component {
       const user = {name, email, mobile, guests};
       const isValid = this.validate();
       if(isValid){
-        fetch('/customer_details', {
+        fetch(`http://darkevo24.pythonanywhere.com/otp`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(user)
-        }).then( res => res.json())
-        .then(data=>{
-           sessionStorage.setItem('customer_access_token', data.customer_access_token);
+        }).then(res => {
+          if(res.ok){
+            window.location.replace("/otp")
+          }
+        });
+
+    //     fetch('https://darkevo24.pythonanywhere.com/customer_details', {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json"
+    //       },
+    //       body: JSON.stringify(user)
+    //     }).then( res => res.json())
+    //     .then(data=>{
+    //        sessionStorage.setItem('customer_access_token', data.customer_access_token);
           
-           sessionStorage.setItem('customer_email', data.email);
+    //        sessionStorage.setItem('customer_email', data.email);
     
-          if (sessionStorage.getItem("customer_access_token") !== null && sessionStorage.getItem("customer_access_token")!=="undefined") {
-            window.location.replace("/scan")
-          }
-          else{
-              alert(data.error)
-          }
-        }).catch(err => console.log(err));
-  
+    //       if (sessionStorage.getItem("customer_access_token") !== null && sessionStorage.getItem("customer_access_token")!=="undefined") {
+    //         window.location.replace("/otp")
+    //       }
+    //       else{
+    //           alert(data.error)
+    //       }
+    //     }).catch(err => console.log("err",err));
       }
-      else{
-        console.log("bye")
-      }
-    };
-
-
+    }
     render(){
         return (  
           <div className="bg">
