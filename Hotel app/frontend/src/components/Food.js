@@ -21,7 +21,7 @@ class Food extends Component {
 
   handleRemove = i => {
     let deletedata = this.state.data.filter((row, j) => j === i)
-    let temp = JSON.stringify(deletedata);
+    // let temp = JSON.stringify(deletedata);
     fetch('http://darkevo24.pythonanywhere.com/menu_delete', {
       method: "POST",
       headers: {

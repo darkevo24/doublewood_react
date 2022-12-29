@@ -1,11 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import Navbar from './Navbar';
+// import {Link} from 'react-router-dom';
+// import Navbar from './Navbar';
 import "./forms.css";
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+// import Button from '@material-ui/core/Button';
+// import Container from '@material-ui/core/Container';
 import './customer.css'
 
 
@@ -63,7 +63,8 @@ export default class Customerform extends React.Component {
       const email = this.state.email;
       const mobile = this.state.mobileno;
       const guests = this.state.guests;
-      const user = {name, email, mobile, guests};
+      const id = sessionStorage.getItem("id");
+      const user = {name, email, mobile, guests,id};
       const isValid = this.validate();
       if(isValid){
         fetch(`http://darkevo24.pythonanywhere.com/otp`, {

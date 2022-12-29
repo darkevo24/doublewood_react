@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Verify from "./Verify";
 
@@ -43,16 +43,16 @@ const StyledYo = styled.div`
   align-items: center;
 `;
 
-const StyledLogo = styled.div`
-  position: absolute;
-  width: 40vw;
-  height: 50vh;
-  margin-left: 11px;
-  left: 40px;
-  top: -57px;
-  background: url(${(props) => props.inputImg}) no-repeat;
-  background-size: contain;
-`;
+// const StyledLogo = styled.div`
+//   position: absolute;
+//   width: 40vw;
+//   height: 50vh;
+//   margin-left: 11px;
+//   left: 40px;
+//   top: -57px;
+//   background: url(${(props) => props.inputImg}) no-repeat;
+//   background-size: contain;
+// `;
 const StyledSubtitle = styled.div`
   position: absolute;
   width: 20vw;

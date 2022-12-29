@@ -1,7 +1,7 @@
-import { data } from 'autoprefixer';
+// import { data } from 'autoprefixer';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {deleteTokensCustomer} from './auth';
+// import {deleteTokensCustomer} from './auth';
 import './customer.css'
 
 export default function Checkout(){
@@ -16,15 +16,15 @@ export default function Checkout(){
         fetch('http://darkevo24.pythonanywhere.com/get_checkout/' + id).then(res => res.json()).then(res => {
             let temp = JSON.parse(res.food);
             temp = temp.filter(function(item){
-                if (item.name.toLowerCase() == "pizza"){
+                if (item.name.toLowerCase() === "pizza"){
                     countPizza = countPizza + 1;
                     return item.name.toLowerCase() !== "pizza";
                 }
-                if (item.name.toLowerCase() == "noodles"){
+                if (item.name.toLowerCase() === "noodles"){
                     countNoodle= countNoodle + 1;
                     return item.name.toLowerCase() !== "noodles";
                 }
-                if (item.name.toLowerCase() == "pasta"){
+                if (item.name.toLowerCase() === "pasta"){
                     countPasta = countPasta + 1;
                     return item.name.toLowerCase() !== "pasta";
                 }
@@ -48,7 +48,7 @@ export default function Checkout(){
                 <p style={{ color : "orange" }}>Ordered Date : {data.date}</p>
                 {data.food && data.food.map(function(item,index,array){
                     for (let i=0;i<index;i++){
-                        if (item == array[i]){
+                        if (item === array[i]){
                             data.splice(index,1);
                         }
                     }

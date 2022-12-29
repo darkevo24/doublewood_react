@@ -52,9 +52,9 @@ const logout = (e) => {
     window.location.replace("/menu");
   }
  
-  const paymentpage = () => {
-    window.location.replace("/payment")
-  }
+  // const paymentpage = () => {
+  //   window.location.replace("/payment")
+  // }
   
   const additem = () => {
     window.location.replace("/add")

@@ -1,4 +1,4 @@
-import React,{useState,useRef, useEffect} from 'react'
+import React,{useState,useRef} from 'react'
 import "./verify.css"
 import OTPInput from "react-otp-input";
 import Toastify from 'toastify-js'
@@ -6,16 +6,9 @@ import Countdown from 'react-countdown';
 
 export default function Verify() {
     const [OTP, setOTP] = useState("");
-    const [date,setDate] = useState(Date.now() + 10000);
+    const [date,setDate] = useState(Date.now() + 300000);
     const clockRef = useRef();
-    useEffect(function(){
-      console.log(Date.now() - date)
-      if ((Date.now() - date) <= 0){
-        fetch(`http://darkevo24.pythonanywhere.com/delete_otp`,{
-          method : "DELETE"
-        }).then(res => res.json()).then(res => console.log(res)).catch(error => console.log(error));
-      }
-    })
+
 
     function handleChange(OTP) {
       setOTP(OTP);
@@ -52,9 +45,27 @@ export default function Verify() {
     }
 
     function Resend(){
-      fetch(`http://darkevo24.pythonanywhere.com/resend`).then(res => res.json()).then(res => console.log(res)).catch(error => console.log(error));
-      setDate(Date.now() + 10000)  
+      fetch(`http://darkevo24.pythonanywhere.com/resend`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({id : id})
+      }).then(res => res.json()).then(res => console.log(res)).catch(error => console.log(error));
+      setDate(Date.now() + 300000)  
       clockRef.current.start()
+    }
+
+    function Renderer({ hours, minutes, seconds, completed }){
+      if (completed){
+        return(
+          <div>
+            <p style={{ marginTop : 10 }} className="p3">Didn't receive the code?</p>
+            <p onClick={Resend} style={{ cursor : "pointer" }} className="resend">Resend</p> 
+          </div>
+        ) 
+      }
+      return <span style={{ textDecoration: "underline" }}>Time Remaining {minutes} : {seconds} </span>
     }
   return (
     <div>
@@ -72,14 +83,10 @@ export default function Verify() {
                 inputStyle="inputStyle"
                 numInputs={6}
                 // separator={<span></span>}
-                isInputNum = "true"
+                isInputNum="true"
             />
             </div>
-            <div>
-            <p className="p3">Didn't receive the code?</p>
-            <p onClick={Resend} style={{ cursor : "pointer" }} className="resend">Resend</p>
-            </div>
-            <p><Countdown date={date} onStart={Resend} ref={clockRef}/></p>
+            <p style={{ marginTop : 10 }}><Countdown date={date} ref={clockRef} renderer={Renderer} /></p>
         </div>
         <button onClick={Submit} type="submit">Verify</button>
         </div>

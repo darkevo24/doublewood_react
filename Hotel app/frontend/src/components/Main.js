@@ -57,9 +57,9 @@ const logout = (e) => {
  }
 
 
- const paymentpage = () => {
-   window.location.replace("/payment")
- }
+//  const paymentpage = () => {
+//    window.location.replace("/payment")
+//  }
 
 export default function ClippedDrawer() {
   const classes = useStyles();

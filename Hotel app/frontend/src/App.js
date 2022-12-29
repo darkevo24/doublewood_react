@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter , Route , Switch} from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute';
-import { PrivateRouteCustomer } from './components/PrivateRouteCustomer';
+// import { PrivateRouteCustomer } from './components/PrivateRouteCustomer';
 import Registerform  from './components/Registerform';
 import Loginform from './components/Loginform';
 import Main from './components/Main';
@@ -10,12 +10,12 @@ import Additem from './components/Additem';
 import Updateitem from './components/Updateitem';
 import Customerform from './components/Customer_details';
 import {isLoggedInManager} from './components/auth';
-import {isLoggedInCustomer} from './components/auth';
-import Example from './components/QRscanner';
+// import {isLoggedInCustomer} from './components/auth';
+// import Example from './components/QRscanner';
 import Customermenu from './components/Customermenu';
 import Checkout from './components/Checkout';
 import Pay from './components/Pay';
-import Home from './components/Home';
+// import Home from './components/Home';
 import Card from './components/Card-otp';
 import QRCode from './components/QRCode';
 

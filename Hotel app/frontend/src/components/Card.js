@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
 
 export default function SimpleCard(props) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  // const bull = <span className={classes.bullet}>•</span>;
   const additem = props.additem
   return (
       <div className='card'>

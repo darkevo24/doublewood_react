@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import QRCode from "react-qr-code";
 import Toastify from 'toastify-js'
 
@@ -16,7 +16,7 @@ export default function QR() {
        fetch(`http://darkevo24.pythonanywhere.com/add_table/${table}`).then(function(res){
         return res.json();
       }).then(function(res){
-        if (res == false){
+        if (res === false){
           setToogle(false);
           Toastify({
             text: "put another number!",

@@ -66,7 +66,7 @@ export default class Registerform extends React.Component {
     };
 
     render(){
-        const {classes} = this.props;
+        // const {classes} = this.props;
         return ( 
           <MuiThemeProvider>
               <Container maxWidth="sm" style={{marginTop:200}}>

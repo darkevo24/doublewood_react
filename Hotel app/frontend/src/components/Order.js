@@ -18,7 +18,7 @@ export default function Order(){
 
  const handleRemove = i => {
     let deletedata = data1.filter((row, j) => j === i)
-    let temp = JSON.stringify(deletedata);
+    // let temp = JSON.stringify(deletedata);
     fetch('http://darkevo24.pythonanywhere.com/order_delete', {
       method: "POST",
       headers: {

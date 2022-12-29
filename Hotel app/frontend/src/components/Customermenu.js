@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import Cart from './Cart';
 import './customer.css';
-import {isLoggedInCustomer} from './auth';
+// import {isLoggedInCustomer} from './auth';
 import Toastify from 'toastify-js'
 
 export default class Customermenu extends React.Component {
@@ -48,7 +48,7 @@ export default class Customermenu extends React.Component {
    } 
 
    handleRemove = (key,i) => {
-     const item = this.state.food[i].price;
+    //  const item = this.state.food[i].price;
      this.setState(prevState => {
        let fooditem = {...prevState.food}
        fooditem[i].quantity = fooditem[i].quantity - 1;
