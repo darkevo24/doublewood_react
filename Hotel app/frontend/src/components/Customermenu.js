@@ -51,7 +51,6 @@ export default class Customermenu extends React.Component {
      const item = this.state.food[i].price;
      this.setState(prevState => {
        let fooditem = {...prevState.food}
-       console.log(fooditem);
        fooditem[i].quantity = fooditem[i].quantity - 1;
        if(fooditem[i].quantity === 0){
            return {food: this.state.food.filter((row,j) => j!==i)}
@@ -61,7 +60,6 @@ export default class Customermenu extends React.Component {
        }
      })
      this.setState(prevState => {
-       console.log(this.state.food[i].price)
        return {grandtotal: prevState.grandtotal - this.state.food[i].price}
      })
    };
@@ -82,7 +80,6 @@ export default class Customermenu extends React.Component {
       const food = JSON.stringify(this.state.food);
       const grandtotal = this.state.grandtotal;
       const customerorder = {food,grandtotal,"tableno" : this.state.id}
-      console.log(JSON.stringify(customerorder));
 
       fetch('http://darkevo24.pythonanywhere.com/order', {
         method: "POST",
@@ -91,7 +88,6 @@ export default class Customermenu extends React.Component {
         },
         body: JSON.stringify(customerorder)
       }).then(res => {
-        console.log(res);
         if(res.ok){
           window.location.replace("/customer")
         }
@@ -100,7 +96,7 @@ export default class Customermenu extends React.Component {
       render(){ 
         return (
             <div className="bg2">
-              <h1 style={{ color : "black",textAlign:"center" }}> Table{this.state.id}</h1>
+              <h1 style={{ color : "black",textAlign:"center",color : "orange",fontSize:30 }}> Table{this.state.id}</h1>
             <div>
                 <Cart
                   food={this.state.food}

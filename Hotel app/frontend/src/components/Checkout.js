@@ -16,7 +16,6 @@ export default function Checkout(){
         fetch('http://darkevo24.pythonanywhere.com/get_checkout/' + id).then(res => res.json()).then(res => {
             let temp = JSON.parse(res.food);
             temp = temp.filter(function(item){
-                console.log(item);
                 if (item.name.toLowerCase() == "pizza"){
                     countPizza = countPizza + 1;
                     return item.name.toLowerCase() !== "pizza";

@@ -56,7 +56,6 @@ export default function SimpleCard() {
         body: JSON.stringify({'tableno':id})
     }).then( res => res.json()).then(data =>{
         setData(data.customer_details)
-        console.log(data)
     })
   },[]);
 
@@ -83,11 +82,9 @@ export default function SimpleCard() {
 
 const handleClick = () => {
    if(validate()){
-      console.log("hi")
       window.location.replace("/checkout/" + id)
    }
    else{
-     console.log("hello")
    }
 }
 

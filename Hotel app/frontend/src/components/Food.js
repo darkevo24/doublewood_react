@@ -16,14 +16,12 @@ class Food extends Component {
   componentDidMount(){
     fetch("http://darkevo24.pythonanywhere.com/menu").then( res => res.json()).then(data =>{
          this.setState({data : data.food_items})
-         console.log(data.food_items)
     })
   }
 
   handleRemove = i => {
     let deletedata = this.state.data.filter((row, j) => j === i)
     let temp = JSON.stringify(deletedata);
-    console.log(temp)
     fetch('http://darkevo24.pythonanywhere.com/menu_delete', {
       method: "POST",
       headers: {
@@ -42,7 +40,6 @@ class Food extends Component {
     let description = this.state.description;
     let amount = this.state.amount;
     let submission = { id , name, description, amount };
-    console.log(submission);
     this.setState({
       data: [...this.state.data, submission]
     })

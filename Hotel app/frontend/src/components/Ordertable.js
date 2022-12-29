@@ -37,7 +37,6 @@ const handleUpdate = (x) => {
     body: JSON.stringify(data)
   }).then(res => {
     if(res.ok){
-      console.log("Status Updated");
     }
   })
 
@@ -55,7 +54,6 @@ const row = (x,i,props) => {
       <TableRow key={`tr-${i}`}>
         {header.map((y, k) => (
         <TableCell key={`trc-${k}`}>
-          {console.log(x['food'])}
            {y.prop === 'food' ? test(JSON.parse(x[y.prop])) : x[y.prop]}
         </TableCell>
       ))}

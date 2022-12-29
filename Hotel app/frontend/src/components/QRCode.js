@@ -41,7 +41,7 @@ export default function QR() {
     function Delete(){
       fetch("http://darkevo24.pythonanywhere.com/delete_table",{
         method:"DELETE"
-      }).then(res => res.json()).then(res => console.log(res)).catch(err => console.log(err))
+      }).then(res => res.json()).catch(err => console.log(err))
     }
   return (
     <div style={{ textAlign : "center" ,display:"flex",alignItems:"center",flexDirection:'column' }}>

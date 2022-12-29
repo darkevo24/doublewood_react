@@ -32,13 +32,7 @@ export default class Example extends Component {
             if(res.ok){
                 window.location.replace("/place_order")
             }
-            else{
-              console.log("data not sent")
-            }
         })
-    }
-    else{
-      console.log("Not working")
     }
       }
 

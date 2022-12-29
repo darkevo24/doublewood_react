@@ -62,7 +62,6 @@ export default class Registerform extends React.Component {
         }).catch(err => console.log(err));;
       }
       else{
-        console.log("bye")
       }
     };
 

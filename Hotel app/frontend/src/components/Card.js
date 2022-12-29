@@ -23,6 +23,7 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 14,
+    color : "orange"
   },
   pos: {
     marginBottom: 12,
