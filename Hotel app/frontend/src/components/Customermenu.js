@@ -35,7 +35,6 @@ export default class Customermenu extends React.Component {
       Toastify({
         text: "Item added to cart",
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
         gravity: "top", // `top` or `bottom`
@@ -79,11 +78,12 @@ export default class Customermenu extends React.Component {
    };
 
    handleConfirm = () => {
-      const sessid = sessionStorage.getItem("customer_access_token");
+      sessionStorage.setItem('id', this.state.id);
       const food = JSON.stringify(this.state.food);
       const grandtotal = this.state.grandtotal;
-      const customerorder = {'sessionid':sessid,food,grandtotal,"tableno" : this.state.id}
+      const customerorder = {food,grandtotal,"tableno" : this.state.id}
       console.log(JSON.stringify(customerorder));
+
       fetch('http://darkevo24.pythonanywhere.com/order', {
         method: "POST",
         headers: {
@@ -93,7 +93,7 @@ export default class Customermenu extends React.Component {
       }).then(res => {
         console.log(res);
         if(res.ok){
-          window.location.replace("/pay/" + this.state.id)
+          window.location.replace("/customer")
         }
       })
      };

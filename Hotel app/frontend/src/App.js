@@ -32,7 +32,7 @@ class App extends Component {
              <PrivateRoute exact path="/menu" component={Menumanagement} />
              <PrivateRoute exact path="/add" component={Additem} />
              <PrivateRoute exact path="/update" component={Updateitem} />
-             {/* <Route exact  path="/customer" component={Customerform} /> */}
+             <Route exact  path="/customer" component={Customerform} />
              <Route exact  path="/otp" component={Card} />
              {/* <Route exact path="/scan" component={Example} /> */}
              {/* <Route exact path="/qr" component={QRCode} /> */}

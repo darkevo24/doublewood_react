@@ -7,10 +7,39 @@ import './customer.css'
 export default function Checkout(){
     const {id} = useParams();
     const [data,setData] = useState([]);
+    var countPizza = 0;
+    var countNoodle = 0;
+    var countPasta = 0;
+    sessionStorage.removeItem("id");
 
     useEffect(function(){
         fetch('http://darkevo24.pythonanywhere.com/get_checkout/' + id).then(res => res.json()).then(res => {
-            setData({...res,food : JSON.parse(res.food)})
+            let temp = JSON.parse(res.food);
+            temp = temp.filter(function(item){
+                console.log(item);
+                if (item.name.toLowerCase() == "pizza"){
+                    countPizza = countPizza + 1;
+                    return item.name.toLowerCase() !== "pizza";
+                }
+                if (item.name.toLowerCase() == "noodles"){
+                    countNoodle= countNoodle + 1;
+                    return item.name.toLowerCase() !== "noodles";
+                }
+                if (item.name.toLowerCase() == "pasta"){
+                    countPasta = countPasta + 1;
+                    return item.name.toLowerCase() !== "pasta";
+                }
+            })
+            if (countPasta>0){
+                temp.push({name : "Pasta",price :20,quantity:countPasta })
+            }
+            if (countPizza>0){
+                temp.push({name : "Pizza",price :50,quantity:countPizza })
+            }
+            if (countNoodle>0){
+                temp.push({name : "Noodle",price :25,quantity:countNoodle })
+            }
+            setData({...res,food : temp})
           })
     },[])
 

@@ -6,11 +6,12 @@
     /* height: 100%;
     width: 100%; */
     /* position: fixed; */
-    background-position: center;
+    /* background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
     display: flex;
     align-items: center;
+    margin-top: 100px;
 }
 
 .cuss {

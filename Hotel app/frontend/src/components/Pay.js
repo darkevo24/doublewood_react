@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   card: {
     width : "50%",
     margin: "auto",
-    // marginTop:100,
+    marginTop:100,
     borderRadius: "1rem",
     boxShadow: '10px 10px black',
     "@media (max-width: 600px)": {
@@ -45,11 +45,9 @@ export default function SimpleCard() {
   const [nameError, setNameerror] = React.useState("");
   const [numberError, setNumbererror] = React.useState("");
   const [toggle, setToggle] = React.useState(false);
-
-  const {id} = useParams();
+  const id = sessionStorage.getItem("id");
   
   useEffect(() => {
-    const sessid = sessionStorage.getItem("customer_access_token");
     fetch("http://darkevo24.pythonanywhere.com/getpayment",{
         method: "POST",
         headers: {
@@ -106,7 +104,6 @@ const handleCancel = () => {
       Toastify({
         text: "Order cancelled",
         duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
         gravity: "top", // `top` or `bottom`

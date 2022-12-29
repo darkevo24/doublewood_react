@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from "react-dom";
 import QRCode from "react-qr-code";
 import Toastify from 'toastify-js'
 
 export default function QR() {
-    const [url,setUrl] = useState("192.168.0.10:3000" + "/place_order/" + table);
+    const [url,setUrl] = useState(window.location.origin + "/place_order/" + table);
     const [table,setTable] = useState();
-    const [toogle,setToogle] = useState(false)
+    const [toogle,setToogle] = useState(false);
+    const [data,setData] = useState([]);
+    useEffect(function(){
+      fetch("http://darkevo24.pythonanywhere.com/get_table").then(res => res.json()).then(res => setData(res.item))
+    },[data])
     function Submit(){
-      setUrl("192.168.0.10:3000" + "/place_order/" + table)
+      setUrl(window.location.origin + "/place_order/" + table)
        fetch(`http://darkevo24.pythonanywhere.com/add_table/${table}`).then(function(res){
         return res.json();
       }).then(function(res){
@@ -17,7 +21,6 @@ export default function QR() {
           Toastify({
             text: "put another number!",
             duration: 3000,
-            destination: "https://github.com/apvarun/toastify-js",
             newWindow: true,
             close: true,
             gravity: "top", // `top` or `bottom`
@@ -34,8 +37,25 @@ export default function QR() {
       }
     })
     }
+
+    function Delete(){
+      fetch("http://darkevo24.pythonanywhere.com/delete_table",{
+        method:"DELETE"
+      }).then(res => res.json()).then(res => console.log(res)).catch(err => console.log(err))
+    }
   return (
     <div style={{ textAlign : "center" ,display:"flex",alignItems:"center",flexDirection:'column' }}>
+      <h1>Table Served</h1>
+      <div style={{ 	gridTemplateColumns: "repeat(6, minmax(0, 1fr))",	gap: '1.25rem',display : "grid" }}>
+      {data.map(function(item,index){
+        return (
+          <div  key={index}>
+            <p style={{ font:"bolder" }}>{item.table}</p>
+          </div>
+        )
+      })}
+      </div>
+      <button onClick={Delete} style={{ height:40,marginTop:10 }}>Delete All Tables</button>
       <div style={{ textAlign : "center" ,display:"flex",alignItems:"center",flexDirection:'column'}}>
         <p style={{ marginTop:20 }}>Input No of Table</p>
         <input onChange={function(e){setTable(e.target.value)}} type="number"></input>

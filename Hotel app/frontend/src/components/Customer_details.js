@@ -73,6 +73,7 @@ export default class Customerform extends React.Component {
           },
           body: JSON.stringify(user)
         }).then(res => {
+          console.log(res);
           if(res.ok){
             window.location.replace("/otp")
           }

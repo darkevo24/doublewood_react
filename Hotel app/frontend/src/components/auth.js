@@ -5,6 +5,10 @@ export function isLoggedInManager() {
 export function isLoggedInCustomer() {
    return sessionStorage.getItem("customer_access_token")!==null && sessionStorage.getItem("customer_access_token")!=="undefined";
 }
+
+export function isLoggedInID() {
+  return sessionStorage.getItem("id")!==null && sessionStorage.getItem("id")!=="undefined";
+}
   
   export function deleteTokens(){
       localStorage.removeItem("access_token");

@@ -8,6 +8,7 @@ export default function Verify() {
     function handleChange(OTP) {
       setOTP(OTP);
     }
+    const id = sessionStorage.getItem("id");
 
     function Submit(){
     fetch(`http://darkevo24.pythonanywhere.com/check-otp`, {
@@ -18,13 +19,12 @@ export default function Verify() {
       body: JSON.stringify({otp : OTP})
     }).then(res => res.json()).then(res => {
       if (res.data === "success"){
-          window.location.replace("/pay")
+          window.location.replace("/pay/" + id)
       }
       else {
         Toastify({
           text: "OTP number is wrong",
           duration: 3000,
-          destination: "https://github.com/apvarun/toastify-js",
           newWindow: true,
           close: false,
           gravity: "top", // `top` or `bottom`
