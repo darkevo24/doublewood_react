@@ -9,12 +9,13 @@ export default function Verify() {
     const [date,setDate] = useState(Date.now() + 10000);
     const clockRef = useRef();
     useEffect(function(){
+      console.log(Date.now() - date)
       if ((Date.now() - date) <= 0){
-        fetch(`http://darkevo24.pythonanywhere.com/delete_otp`<{
+        fetch(`http://darkevo24.pythonanywhere.com/delete_otp`,{
           method : "DELETE"
         }).then(res => res.json()).then(res => console.log(res)).catch(error => console.log(error));
       }
-    },[date])
+    })
 
     function handleChange(OTP) {
       setOTP(OTP);
@@ -54,7 +55,6 @@ export default function Verify() {
       fetch(`http://darkevo24.pythonanywhere.com/resend`).then(res => res.json()).then(res => console.log(res)).catch(error => console.log(error));
       setDate(Date.now() + 10000)  
       clockRef.current.start()
-      console.log(Date.now() - date);
     }
   return (
     <div>
