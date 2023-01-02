@@ -18,6 +18,7 @@ import Pay from './components/Pay';
 // import Home from './components/Home';
 import Card from './components/Card-otp';
 import QRCode from './components/QRCode';
+import modal from './components/Modal';
 
 class App extends Component {
   
@@ -38,6 +39,7 @@ class App extends Component {
              {/* <Route exact path="/qr" component={QRCode} /> */}
              <Route exact path="/place_order/:id" component={Customermenu} />
              <Route exact path="/pay/:id" component={Pay} />
+             <Route exact path="/modal/" component={modal} />
              <Route exact path="/checkout/:id" component={Checkout} />
            </Switch>
           </BrowserRouter>

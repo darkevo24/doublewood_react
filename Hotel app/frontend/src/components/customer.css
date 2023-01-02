@@ -1,4 +1,5 @@
 
+
 .bg {
     /* The image used */
     /* background-image: url(../images/Foodbg.jpg) ; */
@@ -33,7 +34,7 @@
     /* background-position: center;
     background-repeat: no-repeat;
     background-size: cover; */
-    background: rgba(255,148,25,0.3);
+    /* background: rgba(255,148,25,0.3); */
 }
 
 .bg3 {
@@ -84,6 +85,7 @@
 .dialog {
     padding:40px;
 }
+
 
 @media (max-width:600px) {
     .button {

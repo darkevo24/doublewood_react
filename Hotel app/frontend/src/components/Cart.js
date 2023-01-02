@@ -19,7 +19,7 @@ import './customer.css'
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
-    backgroundColor: 'black'
+    backgroundColor: 'orange'
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -49,8 +49,8 @@ export default function FullScreenDialog(props) {
 
   return (
     <div>
-      <Button  variant="outlined"  onClick={handleClickOpen} style={{display: "block" ,margin: "auto", color:"white", fontSize: 18,borderRadius:"10px",backgroundColor:"black"}}>
-        Go to Cart
+      <Button  variant="outlined"  onClick={handleClickOpen} style={{display: "block" ,margin: "auto", color:"white", fontSize: 18,borderRadius:"10px",backgroundColor:"orange",border : "1px solid orange"}}>
+        Add
       </Button>
       <Dialog className='dialog' fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <AppBar className={classes.appBar}>
@@ -75,7 +75,7 @@ export default function FullScreenDialog(props) {
           <Divider />
             <ListItem >
                 <ListItemText primary="Subtotal: " secondary={props.grandtotal}/>
-                <Button style={{backgroundColor: "black", color:"white", }} onClick={() => props.handleConfirm()}>Confirm Order</Button>
+                <Button style={{backgroundColor:"orange",border : "1px solid orange", color:"white", }} onClick={() => props.handleConfirm()}>Confirm Order</Button>
             </ListItem>
         </List>
       </Dialog>

@@ -20,9 +20,9 @@ export default function Checkout(){
                     countPizza = countPizza + 1;
                     return item.name.toLowerCase() !== "pizza";
                 }
-                if (item.name.toLowerCase() === "noodles"){
+                if (item.name.toLowerCase() === "noodle"){
                     countNoodle= countNoodle + 1;
-                    return item.name.toLowerCase() !== "noodles";
+                    return item.name.toLowerCase() !== "noodle";
                 }
                 if (item.name.toLowerCase() === "pasta"){
                     countPasta = countPasta + 1;

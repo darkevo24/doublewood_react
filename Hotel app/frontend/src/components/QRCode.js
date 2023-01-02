@@ -27,7 +27,7 @@ export default function QR() {
             position: "center", // `left`, `center` or `right`
             stopOnFocus: true, // Prevents dismissing of toast on hover
             style: {
-              background: "linear-gradient(to right, orange, orange)",
+              background: "linear-gradient(to top, white, orange)",
             },
             onClick: function(){} // Callback after click
           }).showToast();
@@ -39,9 +39,25 @@ export default function QR() {
     }
 
     function Delete(){
-      fetch("http://darkevo24.pythonanywhere.com/delete_table",{
-        method:"DELETE"
-      }).then(res => res.json()).catch(err => console.log(err))
+      if (confirm('Are you sure you want to delete all table data?')) {
+        fetch("http://darkevo24.pythonanywhere.com/delete_table",{
+          method:"DELETE"
+        }).then(res => res.json()).catch(err => console.log(err));
+        Toastify({
+          text: "Table Deleted",
+          duration: 3000,
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "center", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to top, white, orange)",
+          },
+          onClick: function(){} // Callback after click
+        }).showToast();
+      } else {
+      }
     }
   return (
     <div style={{ textAlign : "center" ,display:"flex",alignItems:"center",flexDirection:'column' }}>
@@ -55,10 +71,15 @@ export default function QR() {
         )
       })}
       </div>
-      <button onClick={Delete} style={{ height:40,marginTop:10 }}>Delete All Tables</button>
+      <button onClick={Delete} style={{ height:40,marginTop:10,background:"red" }}>Delete All Tables</button>
       <div style={{ textAlign : "center" ,display:"flex",alignItems:"center",flexDirection:'column'}}>
         <p style={{ marginTop:20 }}>Input No of Table</p>
-        <input onChange={function(e){setTable(e.target.value)}} type="number"></input>
+        <input onChange={function(e){
+          setTable(e.target.value);
+          if (!table){
+            setToogle(false);
+          }
+          }} type="number"></input>
         <button onClick={Submit} style={{ height:40,marginTop:10 }}>Submit</button>
       </div>
       {(table && toogle )

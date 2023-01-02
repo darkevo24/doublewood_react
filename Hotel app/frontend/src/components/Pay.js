@@ -48,6 +48,9 @@ export default function SimpleCard() {
   const id = sessionStorage.getItem("id");
   
   useEffect(() => {
+    if (!id){
+      history.back();
+    }
     fetch("http://darkevo24.pythonanywhere.com/getpayment",{
         method: "POST",
         headers: {
@@ -107,7 +110,7 @@ const handleCancel = () => {
         position: "left", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
         style: {
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
+          background: "linear-gradient(to top, white, orange)",
         },
         onClick: function(){} // Callback after click
       }).showToast();

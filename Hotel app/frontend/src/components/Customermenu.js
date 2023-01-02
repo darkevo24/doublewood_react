@@ -4,6 +4,7 @@ import Cart from './Cart';
 import './customer.css';
 // import {isLoggedInCustomer} from './auth';
 import Toastify from 'toastify-js'
+import Modal from 'react-modal';
 
 export default class Customermenu extends React.Component {
     constructor(props){
@@ -23,7 +24,7 @@ export default class Customermenu extends React.Component {
     componentDidMount(){
       fetch("http://darkevo24.pythonanywhere.com/menu").then( res => res.json()).then(data =>{
           this.setState({data1: data.food_items})
-      })
+      });
     }
 
     additem  = (x,i) => {
@@ -41,7 +42,7 @@ export default class Customermenu extends React.Component {
         position: "center", // `left`, `center` or `right`
         stopOnFocus: true, // Prevents dismissing of toast on hover
         style: {
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
+          background: "linear-gradient(to top, white, orange)",
         },
         onClick: function(){} // Callback after click
       }).showToast();
@@ -96,7 +97,7 @@ export default class Customermenu extends React.Component {
       render(){ 
         return (
             <div className="bg2">
-              <h1 style={{ color : "black",textAlign:"center",color : "orange",fontSize:30 }}> Table{this.state.id}</h1>
+              <h3 style={{ color : "black",textAlign:"right",margin : 10 }}> Table {this.state.id}</h3>
             <div>
                 <Cart
                   food={this.state.food}
@@ -106,10 +107,13 @@ export default class Customermenu extends React.Component {
                   handleConfirm={this.handleConfirm}
                 />
             </div>
+            <div style={{ marginTop : 40 }}>
+            <h2 style={{ marginLeft : 10 }}>Mains</h2>
             <Card 
             data={this.state.data1}
             additem={this.additem}
             />
+            </div>
             </div>
         )
      }   

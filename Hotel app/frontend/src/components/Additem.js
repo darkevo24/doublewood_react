@@ -16,6 +16,10 @@ import Collapse from '@material-ui/core/Collapse';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const drawerWidth = 240;
 
@@ -72,6 +76,8 @@ export default function ClippedDrawer(props) {
   const [description , setDescription] = useState("");
   const [amount, setAmount] = useState(0);
   const [open, setOpen] = useState(true);
+  const [image, setImage] = useState();
+  const [type,setType] = useState("");
 
   const handleClick = () => {
     setOpen(!open);
@@ -79,19 +85,32 @@ export default function ClippedDrawer(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const data = { id, name, description, amount }
+    let formdata = new FormData();
+    formdata.append("file",image);
+    formdata.append("id",id);
+    formdata.append("name",name);
+    formdata.append("description",description);
+    formdata.append("amount",amount);
+  //   for (var pair of formdata.entries()) {
+  //     console.log(pair[0]+ ', ' + pair[1]); 
+  // }
+    // const data = { id, name, description, amount }
     fetch('http://darkevo24.pythonanywhere.com/menu_create', {
      method: "POST",
-     headers: {
-       "Content-Type": "application/json"
-     },
-     body: JSON.stringify(data)
+     body: formdata
    }).then( res => {
        if(res.ok){
-           window.location.replace("/menu")
+          alert("success")
        }
+       return res.json();
    })
+   .then(res => console.log(res))
  };
+
+ const HandleFile = (e) => {
+  let file = e.target.files[0];
+  setImage(file);
+ }
 
   return (
     <div className={classes.root}>
@@ -161,6 +180,21 @@ export default function ClippedDrawer(props) {
                             fullWidth="true"
                         />
                         <br />
+                        <FormControl fullWidth>
+                          <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={type}
+                            label="Type"
+                            onChange={(event) => setType(event.target.value)}
+                          >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                          </Select>
+                        </FormControl>
+                        <br></br>
                         <TextField
                             placeholder="Enter Description"
                             label="Description"
@@ -181,6 +215,8 @@ export default function ClippedDrawer(props) {
                             fullWidth="true"
                         />
                         <br />
+                        <input onChange={e => HandleFile(e)} type="file" id="image" name="file" 
+            accept="image/*" className="file-custom"/>
                         <br/>
                         <br/>
                         <Button
