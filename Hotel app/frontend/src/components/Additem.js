@@ -16,10 +16,7 @@ import Collapse from '@material-ui/core/Collapse';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import {Select,MenuItem,FormControl,InputLabel} from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -91,6 +88,7 @@ export default function ClippedDrawer(props) {
     formdata.append("name",name);
     formdata.append("description",description);
     formdata.append("amount",amount);
+    formdata.append("type",type);
   //   for (var pair of formdata.entries()) {
   //     console.log(pair[0]+ ', ' + pair[1]); 
   // }
@@ -189,9 +187,8 @@ export default function ClippedDrawer(props) {
                             label="Type"
                             onChange={(event) => setType(event.target.value)}
                           >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value="Main">Main</MenuItem>
+                            <MenuItem value="Beverage">Beverage</MenuItem>
                           </Select>
                         </FormControl>
                         <br></br>

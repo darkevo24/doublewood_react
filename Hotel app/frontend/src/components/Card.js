@@ -44,14 +44,18 @@ export default function SimpleCard(props) {
   const [index,setIndex] = useState();
   const [price,setPrice] = useState();
   const [name,setName] = useState();
-
-  function openModal(x,i) {
+  const [desc,setDesc] = useState();
+  const [arr,setArr] = useState();
+  let count = 0
+  function openModal(x,i,arr) {
     setImage(x.image);
     setItem(x);
     setIndex(i);
     setIsOpen(true);
     setPrice(x.amount);
     setName(x.name);
+    setDesc(x.description);
+    setArr(arr);
   }
 
   function afterOpenModal() {
@@ -64,14 +68,16 @@ export default function SimpleCard(props) {
   Modal.setAppElement('#root');
   return (
       <div className='card'>
-          {props.data.map((x,i) => {
-              const beverages = "beverages";
+          {props.data.map((x,i,arr) => {
+            if (x.type === "Beverage"){
+              count = count + 1;
+            }
             return (
-              <div>
+              <div key={x.id}>
                 {
-                  x.description == "beverages" && <h2 style={{ marginLeft : 10,marginTop : 10 }}>Beverages</h2>
+                  (x.type == "Beverage" && count < 2) && <h2 style={{ marginLeft : 10,marginTop : 10 }}>Beverages</h2>
                 }
-           <Card onClick={()=> openModal(x,i)} className={classes.card}>
+           <Card onClick={()=> openModal(x,i,arr)} className={classes.card}>
            <CardContent className={classes.CardContent} >
              {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
                FoodItem-ID: {x.id}
@@ -103,12 +109,15 @@ export default function SimpleCard(props) {
       >
         <button style={{ width:70,height : 30,padding : 5 }} onClick={closeModal}>back</button>
         <img style={{ width:"100%" }} className='image' src={`data:;base64,${image}`}></img>
+        <div>
         <div style={{ display : "flex",alignItems : "center",width : "100%",position:"relative" }}>
           <h2 style={{ width : 150 }}>{name}</h2>
         <p style={{ textAlign : "right",position:"absolute",right:0,fontSize:16 }}>Rm {price}</p>   
         </div>
+        <p>{desc}</p>
+        </div>
         <div style={{ marginBottom : 20,width : '80%',position:"absolute",bottom : 0,display : "flex",justifyContent : 'center',alignItems : 'center',flexDirection:"column" }}>
-        <Button variant="outlined" style={{backgroundColor:"#ff9419",color : "white",width : 100,height : 30}} onClick={() => additem(item,index)}>Add</Button>
+        <Button variant="outlined" style={{backgroundColor:"#ff9419",color : "white",width : 100,height : 30}} onClick={() => additem(item,index,arr)}>Add</Button>
         </div>
       </Modal>
       </div>

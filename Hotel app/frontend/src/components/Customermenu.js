@@ -13,7 +13,7 @@ export default class Customermenu extends React.Component {
         data1: [],
         food: [],
         grandtotal: 0,
-        id : this.props.match.params.id
+        id : this.props.match.params.id,
       };
       this.additem = this.additem.bind(this);
       this.handleRemove = this.handleRemove.bind(this);
@@ -27,11 +27,22 @@ export default class Customermenu extends React.Component {
       });
     }
 
-    additem  = (x,i) => {
-      const item = {'name':x.name,'price':x.amount,'quantity':1}
-      this.setState({food: this.state.food.concat(item)})
+    additem  = (x,i,array) => {
+      let check = false;
+      let item = {'name':x.name,'price':x.amount,'quantity':1};
+      if (this.state.food){
+        this.state.food.map(function(item,index,array){
+          if (item.name === x.name){
+            array[index].quantity = array[index].quantity + 1;
+            check = true;
+          }
+        })
+      }
+      if (!check){
+        this.setState({food: this.state.food.concat(item)})
+      }
       this.setState(prevState => {
-        return {grandtotal: prevState.grandtotal + x.amount}
+        return {grandtotal: prevState.grandtotal+ x.amount }
       })
       Toastify({
         text: "Item added to cart",

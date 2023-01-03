@@ -51,6 +51,7 @@ export default function SimpleCard() {
     if (!id){
       history.back();
     }
+    document.body.style.backgroundColor = "rgba(255,148,25,0.2)";
     fetch("http://darkevo24.pythonanywhere.com/getpayment",{
         method: "POST",
         headers: {

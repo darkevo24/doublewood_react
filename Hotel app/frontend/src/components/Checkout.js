@@ -10,36 +10,15 @@ export default function Checkout(){
     var countPizza = 0;
     var countNoodle = 0;
     var countPasta = 0;
+    var countJapaneseIcedCoffee = 0;
+    var countWatermelonJuice = 0;
     sessionStorage.removeItem("id");
 
     useEffect(function(){
         fetch('http://darkevo24.pythonanywhere.com/get_checkout/' + id).then(res => res.json()).then(res => {
-            let temp = JSON.parse(res.food);
-            temp = temp.filter(function(item){
-                if (item.name.toLowerCase() === "pizza"){
-                    countPizza = countPizza + 1;
-                    return item.name.toLowerCase() !== "pizza";
-                }
-                if (item.name.toLowerCase() === "noodle"){
-                    countNoodle= countNoodle + 1;
-                    return item.name.toLowerCase() !== "noodle";
-                }
-                if (item.name.toLowerCase() === "pasta"){
-                    countPasta = countPasta + 1;
-                    return item.name.toLowerCase() !== "pasta";
-                }
-            })
-            if (countPasta>0){
-                temp.push({name : "Pasta",price :20,quantity:countPasta })
-            }
-            if (countPizza>0){
-                temp.push({name : "Pizza",price :50,quantity:countPizza })
-            }
-            if (countNoodle>0){
-                temp.push({name : "Noodle",price :25,quantity:countNoodle })
-            }
-            setData({...res,food : temp})
+            setData({...res,food : JSON.parse(res.food)})
           })
+          document.body.style.backgroundColor = "rgba(255,148,25,0.2)";
     },[])
 
     return (
@@ -55,11 +34,11 @@ export default function Checkout(){
                     return (
                         <div style={{ boxShadow : "1px 2px",marginTop : 10,padding:10 ,display:"flex"}} key={index}>
                             <div style={{ textAlign : "left",width : "100%" }}>
-                            <h3>{item.name}</h3>
+                            <h4 style={{ width : 150 }}>{item.name}</h4>
                             <p>x {item.quantity}</p>
                             </div>
                             <div style={{ display:"flex",alignItems : "center" }}>
-                                <h1>Rm{item.price}</h1>
+                                <h3>Rm{item.price * item.quantity}</h3>
                             </div>
                         </div>
                     )
@@ -67,11 +46,11 @@ export default function Checkout(){
                 <div style={{marginTop : 10,padding:10 ,display:"flex"}}>
                     <div style={{ textAlign : "left",width : "100%" }}>
                     <p>Sub Total</p>
-                    <h3 style={{ color : "orange" }}>Total</h3>
+                    <h2 style={{ color : "orange" }}>Total</h2>
                     </div>
                     <div >
                         <p>Rm{data.amount}</p>
-                        <h3 style={{ color : "orange" }}>Rm{data.amount}</h3>
+                        <h2 style={{ color : "orange" }}>Rm{data.amount}</h2>
                     </div>
                 </div>
             </div>

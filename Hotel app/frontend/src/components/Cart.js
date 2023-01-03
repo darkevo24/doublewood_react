@@ -65,7 +65,7 @@ export default function FullScreenDialog(props) {
         </AppBar>
         <List>
           {Object.keys(props.food).map((key,i) => (
-          <ListItem >
+          <ListItem key={i} >
             <ListItemText primary={props.food[key].name} secondary={props.food[key].price} />
             <RemoveIcon fontSize="large" onClick={() => props.handleRemove(key,i)} />
             <Typography fontSize="large">{props.food[key].quantity}</Typography>

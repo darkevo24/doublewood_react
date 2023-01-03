@@ -22,6 +22,10 @@ export default class Customerform extends React.Component {
         toggle : false
       };
 
+      componentDidMount(){
+        document.body.style.backgroundColor = "rgba(255,148,25,0.2)";
+      }
+
     validate = () => {
         let nameError = "";
         let emailError = "";

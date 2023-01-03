@@ -17,7 +17,7 @@ const StyledContainer2 = styled.div`
   height: ${(props) => props.inputHeight};
   top: 0px;
   right: 0px;
-  background: rgba(255,148,25,0.3);
+  background: rgba(255,148,25,0.2);
 
   border-top-right-radius: ${(props) => props.inputBorder || 0};
   border-bottom-right-radius: ${(props) => props.inputBorder || 0};

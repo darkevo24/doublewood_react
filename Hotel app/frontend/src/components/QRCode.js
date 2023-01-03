@@ -10,6 +10,7 @@ export default function QR() {
     const [data,setData] = useState([]);
     useEffect(function(){
       fetch("http://darkevo24.pythonanywhere.com/get_table").then(res => res.json()).then(res => setData(res.item))
+      document.body.style.backgroundColor = "rgba(255,148,25,0.2)";
     },[data])
     function Submit(){
       setUrl(window.location.origin + "/place_order/" + table)
